@@ -3,6 +3,7 @@ export interface Form {
   name: string;
   description: string;
   fields: Field[];
+  submissions: Submission[];
 }
 
 export interface Field {
@@ -13,12 +14,17 @@ export interface Field {
   required: boolean;
   values: string[] | null;
   defaultValue: string | null;
+}
+
+export interface Submission {
+  id: number;
   answers: Answer[];
 }
 
 export interface Answer {
   id: number;
   value: string;
+  field: Field;
 }
 
 export interface AnswerDto {

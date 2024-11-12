@@ -1,0 +1,27 @@
+@for (form of (forms$ | async); track form.id) {
+<table>
+  <thead>
+    <tr>
+      <td>
+        <strong>{{ form.name }}</strong> - {{ form.description }}
+      </td>
+    </tr>
+    <tr>
+      @for (field of form.fields; track field.id) {
+      <th>{{ field.label }}</th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @for (submission of form.submissions; track submission.id) {
+    <tr>
+      @for (field of form.fields; track field.id) {
+      <td>
+        {{ getAnswer(submission.answers, field.id) }}
+      </td>
+      }
+    </tr>
+    }
+  </tbody>
+</table>
+}

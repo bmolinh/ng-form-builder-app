@@ -8,7 +8,7 @@ import {
 } from '@angular/common/http/testing';
 import { environment } from '../../environments/environment';
 import { AnswerDto, Form } from './forms.interface';
-import { allForms as ALL_FORMS_MOCK } from './forms.mocks';
+import { ALL_FORMS_MOCK } from './forms.mocks';
 
 describe('FormsService', () => {
   let service: FormsService;
