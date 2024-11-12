@@ -1,6 +1,6 @@
 import { Field, Form } from './forms.interface';
 
-const FIELDS_MOCK: Field[] = [
+export const FIELDS_MOCK: Field[] = [
   {
     id: 1,
     name: 'test name',

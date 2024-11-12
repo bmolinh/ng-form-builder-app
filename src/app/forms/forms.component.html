@@ -1,27 +1,48 @@
-@for (form of (forms$ | async); track form.id) {
-<table>
-  <thead>
-    <tr>
-      <td>
-        <strong>{{ form.name }}</strong> - {{ form.description }}
-      </td>
-    </tr>
-    <tr>
-      @for (field of form.fields; track field.id) {
-      <th>{{ field.label }}</th>
-      }
-    </tr>
-  </thead>
-  <tbody>
-    @for (submission of form.submissions; track submission.id) {
-    <tr>
-      @for (field of form.fields; track field.id) {
-      <td>
-        {{ getAnswer(submission.answers, field.id) }}
-      </td>
-      }
-    </tr>
+<section>
+  @if (forms$ | async; as forms) {
+
+  <select (change)="setForm($event)">
+    @for (form of forms; track form.id) {
+    <option [value]="form.id">
+      {{ form.name }}
+    </option>
     }
-  </tbody>
-</table>
-}
+  </select>
+
+  @if (form$ | async; as activeForm) {
+
+  <table>
+    <thead>
+      <tr>
+        <td [colSpan]="activeForm.fields.length">
+          <strong>{{ activeForm.name }}</strong> - {{ activeForm.description }}
+        </td>
+      </tr>
+      <tr>
+        @for (field of activeForm.fields; track field.id) {
+        <th>{{ field.label }}</th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (submission of activeForm.submissions; track submission.id) {
+      <tr>
+        @for (field of activeForm.fields; track field.id) {
+        <td>
+          <p>{{ getAnswer(submission.answers, field.id) }}</p>
+        </td>
+        }
+      </tr>
+      }
+    </tbody>
+  </table>
+
+  <button [routerLink]="'/forms/' + activeForm.id" type="submit">
+    Submit entry
+  </button>
+
+  <a routerLink="/">
+    <span>Go home</span>
+  </a>
+  } }
+</section>

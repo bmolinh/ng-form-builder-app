@@ -19,7 +19,9 @@ export class FormsService {
     return this.http.get<Form>(`${this.apiUrl}/forms/${id}`);
   }
 
-  submit(formId: string, fields: AnswerDto[]) {
-    return this.http.post<Form>(`${this.apiUrl}/forms/${formId}`, fields)
+  submit(formId: number, fields: AnswerDto[]) {
+    return this.http.post<Form>(`${this.apiUrl}/forms/${formId}`, {
+      answers: fields,
+    });
   }
 }

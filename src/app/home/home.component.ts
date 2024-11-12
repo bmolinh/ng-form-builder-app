@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LogoComponent } from '../shared/logo.component';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -12,10 +13,6 @@ import { LogoComponent } from '../shared/logo.component';
 export class HomeComponent {
   title = 'Form Builder App';
 
-  startItem = { title: 'Start the app!', link: '/forms' };
-
-  sourceItem = {
-    title: 'Source code',
-    link: 'https://angular.dev/tools/devtools',
-  };
+  sourceCodeUrl = environment.sourceCodeUrl;
+  profileCodeUrl = environment.profileCodeUrl;
 }

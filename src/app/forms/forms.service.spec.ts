@@ -59,13 +59,13 @@ describe('FormsService', () => {
     const dummyForm: Form = ALL_FORMS_MOCK[0];
     const answers: AnswerDto[] = [{ fieldId: 1, value: 'Answer 1' }];
 
-    service.submit('1', answers).subscribe((form) => {
+    service.submit(1, answers).subscribe((form) => {
       expect(form).toEqual(dummyForm);
     });
 
     const req = httpMock.expectOne(`${apiUrl}/forms/1`);
     expect(req.request.method).toBe('POST');
-    expect(req.request.body).toEqual(answers);
+    expect(req.request.body).toEqual({ answers });
     req.flush(dummyForm);
   });
 });

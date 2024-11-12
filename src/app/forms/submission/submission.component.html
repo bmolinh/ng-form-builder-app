@@ -1,0 +1,45 @@
+@if (success) {
+
+<section>
+  <h1>Success!</h1>
+  <h2>Your submission has been received.</h2>
+  <a routerLink="/forms">
+    <span>Go back</span>
+  </a>
+</section>
+
+} @else { @if (form$ | async; as form) {
+
+<form [formGroup]="formGroup" (ngSubmit)="submit(form.id)">
+  <h1>{{ form.name }}</h1>
+
+  <h2>{{ form.description }}</h2>
+
+  @for (field of form.fields; track field.id) {
+
+  <label [for]="field.name">{{ field.label }}</label>
+
+  @if (field.type === 'select') {
+
+  <select [formControlName]="field.id">
+    @for (option of field.values; track $index) {
+
+    <option [value]="option" [selected]="option === field.defaultValue">
+      {{ option }}
+    </option>
+
+    }
+  </select>
+
+  } @else {
+
+  <input [formControlName]="field.id" [type]="field.type" />
+
+  } }
+  <button type="submit">Submit</button>
+
+  <a routerLink="/forms">
+    <span>Go back</span>
+  </a>
+</form>
+} }
